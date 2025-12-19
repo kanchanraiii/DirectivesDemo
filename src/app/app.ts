@@ -1,12 +1,28 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { HighlightDirective } from './highlight';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  // styleUrls:['']
 })
 export class App {
-  protected readonly title = signal('DirectivesDemo');
+
+  studentName='';
+  students: string[]=[];
+  
+  addStudent(){
+    if(this.studentName.trim()){
+      this.students.push(this.studentName);
+      this.studentName='';
+    }
+  }
+
+  deleteStudent(index:number){
+    this.students.splice(index,1);
+  }
 }
